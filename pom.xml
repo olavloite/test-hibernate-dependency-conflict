@@ -1,0 +1,188 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+  xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.example</groupId>
+  <artifactId>dependencies-test</artifactId>
+  <version>1.0-SNAPSHOT</version>
+
+  <properties>
+    <java.version>17</java.version>
+    <maven.compiler.source>17</maven.compiler.source>
+    <maven.compiler.target>17</maven.compiler.target>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+
+    <maven.compiler.plugin.version>3.9.0</maven.compiler.plugin.version>
+    <maven.dependency.plugin>3.0.1</maven.dependency.plugin>
+    <maven.release.plugin.version>2.5.3</maven.release.plugin.version>
+    <maven.resources.plugin.version>2.7</maven.resources.plugin.version>
+    <maven.site.plugin.version>3.4</maven.site.plugin.version>
+    <maven.surefire.plugin.version>3.1.0</maven.surefire.plugin.version>
+    <maven.war.plugin.version>2.5</maven.war.plugin.version>
+    <resilience4j.spring3.version>2.0.2</resilience4j.spring3.version>
+    <skip.unit.tests>false</skip.unit.tests>
+    <spring-cloud.version>2023.0.3</spring-cloud.version>
+    <springdoc.openapi.version>2.3.0</springdoc.openapi.version>
+    <version.jacoco>0.8.8</version.jacoco>
+    <wiremock.version>3.5.4</wiremock.version>
+  </properties>
+
+  <parent>
+    <artifactId>spring-boot-starter-parent</artifactId>
+    <groupId>org.springframework.boot</groupId>
+    <relativePath/>
+    <version>3.2.1</version> <!-- lookup parent from repository -->
+  </parent>
+  
+  <dependencyManagement>
+    <dependencies>
+      <dependency>
+        <artifactId>resilience4j-spring-boot3</artifactId>
+        <groupId>io.github.resilience4j</groupId>
+        <version>${resilience4j.spring3.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>resilience4j-reactor</artifactId>
+        <groupId>io.github.resilience4j</groupId>
+        <version>${resilience4j.spring3.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>common-library</artifactId>
+        <groupId>com.sams.payment</groupId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>common-model</artifactId>
+        <groupId>com.sams.payment</groupId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>authorizer</artifactId>
+        <groupId>com.sams.payment</groupId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>settlement-processor</artifactId>
+        <groupId>com.sams.payment</groupId>
+        <version>${project.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>giftcard-processor</artifactId>
+        <groupId>com.sams.payment</groupId>
+        <version>${project.version}</version>
+      </dependency>
+
+      <dependency>
+        <artifactId>wiremock-standalone</artifactId>
+        <groupId>org.wiremock</groupId>
+        <scope>test</scope>
+        <version>${wiremock.version}</version>
+      </dependency>
+      <dependency>
+        <artifactId>spring-cloud-dependencies</artifactId>
+        <groupId>org.springframework.cloud</groupId>
+        <scope>import</scope>
+        <type>pom</type>
+        <version>${spring-cloud.version}</version>
+      </dependency>
+
+
+      <!-- Additional dependency management that was added to fix dependency conflicts for OpenTelemetry -->
+      <dependency>
+        <groupId>io.opentelemetry</groupId>
+        <artifactId>opentelemetry-bom</artifactId>
+        <version>1.42.1</version>
+        <type>pom</type>
+        <scope>import</scope>
+      </dependency>
+      
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+    <!-- Additional dependency for running this sample on the Spanner emulator -->
+    <dependency>
+      <groupId>org.testcontainers</groupId>
+      <artifactId>testcontainers</artifactId>
+    </dependency>
+    
+    
+    
+    <dependency>
+      <artifactId>spring-boot-starter-webflux</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-test</artifactId>
+      <groupId>org.springframework.boot</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>reactor-test</artifactId>
+      <groupId>io.projectreactor</groupId>
+      <scope>test</scope>
+    </dependency>
+    <dependency>
+      <artifactId>lombok</artifactId>
+      <groupId>org.projectlombok</groupId>
+      <version>1.18.30</version>
+    </dependency>
+    <dependency>
+      <artifactId>spring-boot-starter-actuator</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+<!--    <dependency>-->
+<!--      <artifactId>micrometer-tracing-bridge-otel</artifactId>-->
+<!--      <groupId>io.micrometer</groupId>-->
+<!--    </dependency>-->
+    <dependency>
+      <artifactId>spring-boot-starter-aop</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>micrometer-registry-prometheus</artifactId>
+      <groupId>io.micrometer</groupId>
+    </dependency>
+    <dependency>
+      <artifactId>springdoc-openapi-starter-webflux-ui</artifactId>
+      <groupId>org.springdoc</groupId>
+      <version>${springdoc.openapi.version}</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>resilience4j-spring-boot3</artifactId>
+      <groupId>io.github.resilience4j</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>resilience4j-reactor</artifactId>
+      <groupId>io.github.resilience4j</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>wiremock-standalone</artifactId>
+      <groupId>org.wiremock</groupId>
+      <scope>test</scope>
+    </dependency>
+
+    <dependency>
+      <artifactId>spring-boot-starter-data-jpa</artifactId>
+      <groupId>org.springframework.boot</groupId>
+    </dependency>
+
+    <dependency>
+      <artifactId>google-cloud-spanner-hibernate-dialect</artifactId>
+      <groupId>com.google.cloud</groupId>
+      <version>3.4.0</version>
+    </dependency>
+
+    <dependency>
+      <artifactId>google-cloud-spanner-jdbc</artifactId>
+      <groupId>com.google.cloud</groupId>
+      <version>2.20.1</version>
+    </dependency>
+    
+  </dependencies>
+</project>
